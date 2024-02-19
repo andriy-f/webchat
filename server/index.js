@@ -1,4 +1,4 @@
-import uws from 'uWebSockets.js'
+import uws, { DEDICATED_COMPRESSOR_3KB } from 'uWebSockets.js'
 
 const serverPort = process.env.PORT ? parseInt(process.env.PORT) : 9001;
 
@@ -10,7 +10,7 @@ uws.App({
   idleTimeout: 32,
   maxBackpressure: 1024,
   maxPayloadLength: 512,
-  // compression: DEDICATED_COMPRESSOR_3KB,
+  compression: DEDICATED_COMPRESSOR_3KB,
 
   /* For brevity we skip the other events (upgrade, open, ping, pong, close) */
   message: (ws, message, isBinary) => {
