@@ -8,6 +8,10 @@
     "typescript": "^5.0.0"
   },
   "type": "module",
+  "scripts": {
+    "prod": "node server/index.js",
+    "build": "tsc"
+  },
   "dependencies": {
     "uWebSockets.js": "uNetworking/uWebSockets.js#v20.42.0"
   }
