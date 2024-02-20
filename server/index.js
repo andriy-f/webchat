@@ -2,6 +2,13 @@ import uws, { DEDICATED_COMPRESSOR_3KB } from 'uWebSockets.js'
 
 const serverPort = process.env.PORT ? parseInt(process.env.PORT) : 9001;
 
+// Signal handling
+function handle(signal) {
+  console.log(`*^!@4=> Received event: ${signal}`)
+}
+
+process.on('SIGHUP', handle)
+
 uws.App({
 
 }).ws('/*', {

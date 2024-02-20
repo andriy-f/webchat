@@ -1,0 +1,7 @@
+services:
+  server:
+    restart: unless-stopped
+    build: ./server
+    init: true
+    env_file:
+      - server.env
