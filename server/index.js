@@ -7,7 +7,11 @@ function handle(signal) {
   console.log(`*^!@4=> Received event: ${signal}`)
 }
 
-process.on('SIGHUP', handle)
+// process.on('SIGHUP', handle)
+// process.on('SIGINT', handle)
+
+// Docker container stops longer with SIGTERM handler set
+// process.on('SIGTERM', handle)
 
 uws.App({
 
@@ -27,15 +31,17 @@ uws.App({
     let ok = ws.send(message, isBinary, true);
   }
 
-}).get('/*', (res, req) => {
+}).get('/health', (res, req) => {
+  res.writeStatus('200 OK').end('healthy');
+}).get('/', (res, req) => {
+  // generic http handler
 
-  /* It does Http as well */
-  res.writeStatus('200 OK').writeHeader('IsExample', 'Yes').end('Hello there!');
+  res.writeStatus('200 OK').end('This is K-chat server!');
 
 }).listen(serverPort, (listenSocket) => {
 
   if (listenSocket) {
-    console.log(`Listening to port ${serverPort}`);
+    console.log(`Listening on port ${serverPort}`);
   }
 
 });

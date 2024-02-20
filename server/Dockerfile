@@ -1,6 +1,12 @@
 FROM node:20-bookworm-slim
+ARG PORT=8080
 
-ENV NODE_ENV production
+RUN set -ex; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends curl; \
+    apt-get clean;
+
+ENV NODE_ENV=production
 WORKDIR /app
 
 # USER node
@@ -11,5 +17,8 @@ RUN set -ex; \
     npm cache clean --force
 
 COPY index.js ./
+HEALTHCHECK --start-period=2s CMD [ "curl", "--fail", "-sS", "http://localhost:8080/health" ]
+ENV PORT=$PORT
+EXPOSE $PORT
 USER node
 CMD [ "node", "index.js" ]
