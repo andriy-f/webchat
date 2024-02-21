@@ -17,7 +17,7 @@ FROM base as development
 EXPOSE 80
 ENV PORT 80
 ENV HOST 0.0.0.0
-CMD ["npm", "run", "develeop"]
+CMD ["npm", "run", "develop"]
 
 # Unit tests
 # =====
