@@ -3,5 +3,19 @@ services:
     restart: unless-stopped
     build: ./server
     init: true
+    ports:
+      - 8080:8080
     env_file:
       - server.env
+
+  client:
+    restart: unless-stopped
+    build:
+      context: ./client
+      target: development
+    init: true
+    ports:
+      - 8081:8081
+    environment:
+      - GATSBY_SERVER_URL=localhost:8080
+      - PORT=8081
