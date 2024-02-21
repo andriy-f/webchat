@@ -10,14 +10,15 @@ RUN set -ex; \
   npm ci; \
   npm cache clean --force;
 
+COPY . .
+
 # Development
 # ===========
 FROM base as development
 # Dev runtime config
 EXPOSE 8081
 ENV PORT 8081
-ENV HOST 0.0.0.0
-CMD ["npm", "run", "develop"]
+CMD ["npm", "run", "develop-lan"]
 
 # Unit tests
 # =====
