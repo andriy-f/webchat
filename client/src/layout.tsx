@@ -3,12 +3,17 @@ import { Link } from "gatsby"
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (<>
-    <header>K-Chat</header>
+    <header>
+      <div className="text-xl font-medium text-black">
+        K-Chat
+      </div>
+    </header>
     <nav>
-      Menu:
-      <ul>
+      Menu:<ul className="flex p-6">
         <li>
-          <Link to="/">Home</Link>
+          <Link className="p-6" to="/">Home</Link>
+        </li>
+        <li>
           <Link to="/">About</Link>
         </li>
       </ul>
