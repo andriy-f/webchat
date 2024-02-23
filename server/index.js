@@ -5,13 +5,13 @@ const serverPort = process.env.PORT ? parseInt(process.env.PORT) : 9001;
 // Signal handling
 function handle(signal) {
   console.log(`*^!@4=> Received event: ${signal}`)
+  // handle cleanup, like closing db connections
+  process.exit(0)
 }
 
-// process.on('SIGHUP', handle)
-// process.on('SIGINT', handle)
-
-// Docker container stops longer with SIGTERM handler set
-// process.on('SIGTERM', handle)
+process.on('SIGHUP', handle)
+process.on('SIGINT', handle)
+process.on('SIGTERM', handle)
 
 uws.App({
 
