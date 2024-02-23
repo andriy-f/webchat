@@ -18,12 +18,12 @@ FROM base as development
 # Dev runtime config
 EXPOSE 8081
 ENV PORT 8081
-CMD ["npm", "run", "develop-lan"]
+CMD ["node_modules/.bin/gatsby", "develop", "-H", "0.0.0.0"]
 
 # Unit tests
 # =====
 FROM base as test
-RUN su-exec node env \
+RUN env \
   NODE_ENV=test \
   CI=true \
   npm run test
