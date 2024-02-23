@@ -1,6 +1,6 @@
 #!/bin/sh
 DEST=/usr/share/nginx/html/index.html
 TEMPLATE=${DEST}.template
-envsubst '$GATSBY_SERVER_URL' <${TEMPLATE} >${DEST}
+envsubst '$GATSBY_KCHAT_SERVER_URL' <${TEMPLATE} >${DEST}
 
 exec "$@"

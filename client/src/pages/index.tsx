@@ -1,13 +1,17 @@
-import * as React from "react"
-import type { HeadFC, PageProps } from "gatsby"
+import * as React from 'react'
+import type { HeadFC, PageProps } from 'gatsby'
+
+import Layout from '../layout'
+import { serverUrl } from '../config'
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main>
-      <h1>
-        K-Chat
-      </h1>
-    </main>
+    <Layout>
+      <div>Main page</div>
+      <div>
+        Server url: {serverUrl}
+      </div>
+    </Layout>
   )
 }
 

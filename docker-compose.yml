@@ -14,7 +14,9 @@ services:
       context: ./client
       target: development
     init: true
+    volumes:
+      - ./client/src:/app/src
     ports:
       - 8081:8081
     environment:
-      - GATSBY_SERVER_URL=http://localhost:8080
+      - GATSBY_KCHAT_SERVER_URL=http://localhost:8080

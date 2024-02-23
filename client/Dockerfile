@@ -16,6 +16,7 @@ COPY . .
 # ===========
 FROM base as development
 # Dev runtime config
+
 EXPOSE 8081
 ENV PORT 8081
 CMD ["node_modules/.bin/gatsby", "develop", "-H", "0.0.0.0"]
