@@ -47,8 +47,8 @@ WORKDIR /usr/share/nginx/html
 # Copy runtime data
 COPY deployment/docker-entrypoint /docker-entrypoint
 COPY deployment/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist ./
-RUN mv ./index.html ./index.html.template
+COPY --from=build /app/public ./
+RUN mv ./kchat-config.js ./kchat-config.js.template
 
 # Runtime config
 ENTRYPOINT ["/docker-entrypoint"]

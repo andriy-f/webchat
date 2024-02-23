@@ -1,5 +1,5 @@
 #!/bin/sh
-DEST=/usr/share/nginx/html/index.html
+DEST=/usr/share/nginx/html/kchat-config.js
 TEMPLATE=${DEST}.template
 envsubst '$GATSBY_KCHAT_SERVER_URL' <${TEMPLATE} >${DEST}
 
