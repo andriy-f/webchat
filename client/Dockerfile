@@ -31,7 +31,9 @@ RUN su-exec node env \
 # Build
 # =====
 FROM base as build
-RUN su-exec node env NODE_ENV=production npm run build
+USER node
+ENV NODE_ENV=production
+RUN npm run build
 
 # ==========
 # Prod image
@@ -42,8 +44,8 @@ FROM nginx:alpine as production
 WORKDIR /usr/share/nginx/html
 
 # Copy runtime data
-COPY docker-entrypoint /docker-entrypoint
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY deployment/docker-entrypoint /docker-entrypoint
+COPY deployment/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist ./
 RUN mv ./index.html ./index.html.template
 
