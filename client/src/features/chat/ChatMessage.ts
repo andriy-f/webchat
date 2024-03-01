@@ -1,10 +1,11 @@
 export interface ChatMessage {
-  message: string
+  text: string
   username: string
   timestamp: number
 }
 
 export interface ChatMessage2Send {
-  message: string
+  text: string
   username: string
+  timestamp: number // todo remove after implementing server side timestamp
 }
