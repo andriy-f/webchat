@@ -8,7 +8,7 @@ const Chat: React.FC = () => {
     const chatSocket = new WebSocket(
       serverUrl,
       'protocolOne',
-    );
+    )
     chatSocket.onopen = function (event) {
       setStatus('Connected')
       console.log('Connected to the chat server.', event)
