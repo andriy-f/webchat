@@ -18,5 +18,5 @@ services:
       - ./client/src:/app/src
     ports:
       - 8081:8081
-    environment:
-      - GATSBY_KCHAT_SERVER_URL=ws://localhost:8080
+    env_file:
+      - client.env
