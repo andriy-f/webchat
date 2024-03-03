@@ -6,7 +6,7 @@ import ChatMessages from './ChatMessages'
 import { ChatMessage, ChatMessage2Send } from './ChatMessage'
 
 const Chat: React.FC = () => {
-  const [status, setStatus] = React.useState('Connecting...')
+  const [isConnected, setIsConnected] = React.useState(false)
   const [messages, setMessages] = React.useState<ChatMessage[]>([])
   const chatSocketRef = React.useRef<WebSocket | null>(null)
 
@@ -30,33 +30,38 @@ const Chat: React.FC = () => {
     )
 
     const chatSocket = chatSocketRef.current
-    chatSocket.onopen = function (event) {
-      setStatus('Connected')
+    chatSocket.addEventListener('open', (event) => {
+      setIsConnected(true)
       console.log('Connected to the chat server.', event)
-    }
+    })
 
-    chatSocket.onmessage = (event) => {
+    chatSocket.addEventListener('message', (event) => {
       console.log(event) // TODO
       const message = JSON.parse(event.data) as ChatMessage
       setMessages(oldMessages => oldMessages.concat(message))
-    }
+    })
 
     chatSocket.addEventListener('error', (event) => {
+      // disconnected due to error
+      setIsConnected(false)
       console.log('WebSocket error: ', event);
-      setStatus('Error')
     })
 
     chatSocket.addEventListener('close', (event) => {
+      // disconnected due to close
+      setIsConnected(false)
       console.log('WebSocket closed: ', event);
-      setStatus('Disconnected')
     })
   }, [])
-  return (<>
-    <div>Status: {status}</div>
+  return (<div
+  >
+    <div className='flex'>Status:&nbsp;{isConnected ?
+      <div className='text-emerald-500'>Connected</div> :
+      <div className='text-red-100'>Disconnected</div>
+    }</div>
     <ChatMessages messages={messages} />
-    <ChatInput onSend={handleSend} />
-  </>
-  )
+    <ChatInput disabled={!isConnected} onSend={handleSend} />
+  </div>)
 }
 
 export default Chat

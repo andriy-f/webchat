@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 const ChatInput: React.FC<{
+  disabled: boolean
   onSend: (message: string) => void
 }> = (props) => {
   const [message, setMessage] = React.useState('')
@@ -25,12 +26,19 @@ const ChatInput: React.FC<{
     <>
       <input
         type="text"
+        disabled={props.disabled}
+        className='border-2 border-gray-300 rounded-md p-2 w-3/4'
         value={message}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder="Type a message..."
       />
-      <button onClick={handleClick}>Send</button>
+      <button
+        disabled={props.disabled}
+        className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+        onClick={handleClick}>
+        Send
+      </button>
     </>
   )
 }
