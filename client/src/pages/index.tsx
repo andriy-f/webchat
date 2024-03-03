@@ -2,7 +2,6 @@ import * as React from 'react'
 import type { HeadFC, PageProps } from 'gatsby'
 
 import Layout from '../layout'
-import { serverUrl } from '../config'
 import Chat from '../features/chat/Chat'
 
 const IndexPage: React.FC<PageProps> = () => {
