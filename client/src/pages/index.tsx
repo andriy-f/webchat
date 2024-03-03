@@ -11,10 +11,7 @@ const IndexPage: React.FC<PageProps> = () => {
       <h1 className="text-3xl font-bold underline">
         Main page
       </h1>
-      <div>
-        Server url: {serverUrl}
-        <Chat />
-      </div>
+      <Chat />
     </Layout>
   )
 }
