@@ -41,7 +41,7 @@ uws.App({
 }).listen(serverPort, (listenSocket) => {
 
   if (listenSocket) {
-    console.log(`Listening on port ${serverPort}`);
+    console.log(`K-Chat server is listening on port ${serverPort}`);
   }
 
 });
