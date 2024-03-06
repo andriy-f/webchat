@@ -44,7 +44,6 @@ const Layout: React.FC<React.PropsWithChildren<{ pageTitle: string }>> = ({ page
         </main>
       </div>
     </AuthenticationContext.Provider>
-
   )
 }
 
