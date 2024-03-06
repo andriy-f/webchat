@@ -5,6 +5,7 @@ import ChatInput from './ChatInput'
 import ChatMessages from './ChatMessages'
 import { ChatMessage, ChatMessage2Send } from './ChatMessage'
 import { AuthenticationContext } from '../auth/AuthenticationContext'
+import RequireAuth from '../auth/RequireAuth'
 
 const Chat: React.FC = () => {
   const [isConnected, setIsConnected] = React.useState(false)
@@ -64,14 +65,14 @@ const Chat: React.FC = () => {
     }
   }, [])
   return (
-    <div>
+    <RequireAuth>
       <div className='flex'>Status:&nbsp;{isConnected ?
         <div className='text-emerald-500'>Connected</div> :
         <div className='text-red-500'>Disconnected</div>
       }</div>
       <ChatMessages messages={messages} />
       <ChatInput disabled={!isConnected} onSend={handleSend} />
-    </div>)
+    </RequireAuth>)
 }
 
 export default Chat
