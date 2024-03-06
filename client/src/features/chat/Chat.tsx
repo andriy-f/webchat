@@ -4,17 +4,19 @@ import { serverUrl } from '../../config'
 import ChatInput from './ChatInput'
 import ChatMessages from './ChatMessages'
 import { ChatMessage, ChatMessage2Send } from './ChatMessage'
+import { AuthenticationContext } from '../auth/AuthenticationContext'
 
 const Chat: React.FC = () => {
   const [isConnected, setIsConnected] = React.useState(false)
   const [messages, setMessages] = React.useState<ChatMessage[]>([])
   const chatSocketRef = React.useRef<WebSocket | null>(null)
+  const authContext = React.useContext(AuthenticationContext)
 
   const handleSend = (messageText: string) => {
     console.log('Sending message:', messageText)
     const chatMsg2Send: ChatMessage2Send = {
       text: messageText,
-      username: 'me',
+      username: authContext.userName,
       timestamp: Date.now()
     }
 
