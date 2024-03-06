@@ -13,7 +13,6 @@ const Chat: React.FC = () => {
   const authContext = React.useContext(AuthenticationContext)
 
   const handleSend = (messageText: string) => {
-    console.log('Sending message:', messageText)
     const chatMsg2Send: ChatMessage2Send = {
       text: messageText,
       username: authContext.userName,

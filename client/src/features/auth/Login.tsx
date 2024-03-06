@@ -9,7 +9,6 @@ const Login: React.FC = () => {
 
   const handleLogin = () => {
     authContext.login(userName)
-    console.log('nl', authContext.userName)
     navigate('/')
   }
 
