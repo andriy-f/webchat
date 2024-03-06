@@ -4,12 +4,11 @@ import type { HeadFC, PageProps } from 'gatsby'
 import Layout from '../layout'
 import { serverUrl } from '../config'
 
+const pageTitle = 'About'
+
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <Layout>
-      <h1 className="text-3xl font-bold">
-        About page
-      </h1>
+    <Layout pageTitle='About'>
       <div>
         Server: {serverUrl}
       </div>
@@ -19,4 +18,4 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage
 
-export const Head: HeadFC = () => <title>About Page</title>
+export const Head: HeadFC = () => <title>{pageTitle}</title>
