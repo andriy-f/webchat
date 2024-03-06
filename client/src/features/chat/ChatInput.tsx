@@ -29,6 +29,7 @@ const ChatInput: React.FC<{
         disabled={props.disabled}
         className='border-2 border-gray-300 rounded-md p-2 w-3/4'
         value={message}
+        autoFocus
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder="Type a message..."

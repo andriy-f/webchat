@@ -37,8 +37,8 @@ const Chat: React.FC = () => {
     })
 
     chatSocket.addEventListener('message', (event) => {
-      console.log(event) // TODO
       const message = JSON.parse(event.data) as ChatMessage
+      console.log('Received message:', message)
       setMessages(oldMessages => oldMessages.concat(message))
     })
 
@@ -54,15 +54,15 @@ const Chat: React.FC = () => {
       console.log('WebSocket closed: ', event);
     })
   }, [])
-  return (<div
-  >
-    <div className='flex'>Status:&nbsp;{isConnected ?
-      <div className='text-emerald-500'>Connected</div> :
-      <div className='text-red-100'>Disconnected</div>
-    }</div>
-    <ChatMessages messages={messages} />
-    <ChatInput disabled={!isConnected} onSend={handleSend} />
-  </div>)
+  return (
+    <div>
+      <div className='flex'>Status:&nbsp;{isConnected ?
+        <div className='text-emerald-500'>Connected</div> :
+        <div className='text-red-500'>Disconnected</div>
+      }</div>
+      <ChatMessages messages={messages} />
+      <ChatInput disabled={!isConnected} onSend={handleSend} />
+    </div>)
 }
 
 export default Chat
