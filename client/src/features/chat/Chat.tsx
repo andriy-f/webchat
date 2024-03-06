@@ -23,14 +23,19 @@ const Chat: React.FC = () => {
       chatSocketRef.current.send(JSON.stringify(chatMsg2Send));
     }
 
+    setMessages(oldMessages => oldMessages.concat({
+      ...chatMsg2Send,
+      username: 'Me (test)'
+    })) // TODO
   }
   React.useEffect(() => {
-    chatSocketRef.current = new WebSocket(
+    const chatSocket = new WebSocket(
       serverUrl,
       'protocolOne',
     )
 
-    const chatSocket = chatSocketRef.current
+    chatSocketRef.current = chatSocket
+
     chatSocket.addEventListener('open', (event) => {
       setIsConnected(true)
       console.log('Connected to the chat server.', event)
@@ -53,6 +58,10 @@ const Chat: React.FC = () => {
       setIsConnected(false)
       console.log('WebSocket closed: ', event);
     })
+
+    return () => {
+      chatSocket.close()
+    }
   }, [])
   return (
     <div>
