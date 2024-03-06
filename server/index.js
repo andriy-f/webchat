@@ -13,8 +13,9 @@ process.on('SIGHUP', handle)
 process.on('SIGINT', handle)
 process.on('SIGTERM', handle)
 
-uws.App({
+const chatTopic = 'home/chat'
 
+uws.App({
 }).ws('/*', {
 
   /* There are many common helper features */
@@ -23,12 +24,17 @@ uws.App({
   maxPayloadLength: 512,
   compression: DEDICATED_COMPRESSOR_3KB,
 
-  /* For brevity we skip the other events (upgrade, open, ping, pong, close) */
+  /* Handlers */
+  open: (ws) => {
+    /* Let this client listen to topic "broadcast" */
+    ws.subscribe(chatTopic);
+  },
   message: (ws, message, isBinary) => {
     /* You can do app.publish('sensors/home/temperature', '22C') kind of pub/sub as well */
 
-    /* Here we echo the message back, using compression if available */
-    let ok = ws.send(message, isBinary, true);
+    ws.publish(chatTopic, message, isBinary, true)
+    // Here we echo the message back, using compression if available
+    // const isOk = ws.send(message, isBinary, true);
   }
 
 }).get('/health', (res, req) => {
@@ -42,6 +48,8 @@ uws.App({
 
   if (listenSocket) {
     console.log(`K-Chat server is listening on port ${serverPort}`);
+  } else {
+    console.log('Failed to listen to port ' + serverPort);
   }
 
 });
