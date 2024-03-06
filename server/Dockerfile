@@ -1,4 +1,4 @@
-FROM node:20-bookworm-slim
+FROM node:20-bookworm-slim as base
 ARG PORT=8080
 
 RUN set -ex; \
@@ -22,3 +22,7 @@ ENV PORT=$PORT
 EXPOSE $PORT
 USER node
 CMD [ "node", "index.js" ]
+
+FROM base as development
+ENV NODE_ENV=development
+CMD [ "./node_modules/.bin/nodemon" ]

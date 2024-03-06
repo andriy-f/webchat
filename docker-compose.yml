@@ -1,7 +1,9 @@
 services:
   server:
     restart: unless-stopped
-    build: ./server
+    build:
+      context: ./server
+      target: development
     init: true
     ports:
       - 8080:8080
