@@ -10,7 +10,9 @@ RUN set -ex; \
   npm ci; \
   npm cache clean --force;
 
-COPY . .
+COPY gatsby-config.ts gatsby-browser.js postcss.config.js tailwind.config.js tsconfig.json ./
+COPY static ./static
+COPY src ./src
 
 # Development
 # ===========
