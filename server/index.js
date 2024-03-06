@@ -33,6 +33,9 @@ uws.App({
     /* You can do app.publish('sensors/home/temperature', '22C') kind of pub/sub as well */
 
     ws.publish(chatTopic, message, isBinary, true)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('message', message)
+    }
     // Here we echo the message back, using compression if available
     // const isOk = ws.send(message, isBinary, true);
   }
