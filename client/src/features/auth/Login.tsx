@@ -6,11 +6,18 @@ import { AuthenticationContext } from './AuthenticationContext'
 const Login: React.FC = () => {
   const authContext = React.useContext(AuthenticationContext)
   const [userName, setUserName] = React.useState('')
+  const inputRef = React.useRef<HTMLInputElement>(null)
 
   const handleLogin = () => {
     authContext.login(userName)
     navigate('/')
   }
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      inputRef.current?.focus()
+    })
+  }, [])
 
   return (
     <div>
@@ -20,15 +27,16 @@ const Login: React.FC = () => {
           handleLogin()
         }}>
           <div>
-            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="k-chat-login-username" className="block text-sm font-medium leading-6 text-gray-900">
               Username
             </label>
             <div className="mt-2">
               <input
-                id="username"
+                id="k-chat-login-username"
                 name="username"
                 type="text"
-                autoFocus={true}
+                ref={inputRef}
+                value={userName}
                 onChange={(e) => { setUserName(e.target.value) }}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
