@@ -6,6 +6,7 @@ import ChatMessages from './ChatMessages'
 import { ChatMessage, ChatMessage2Send } from './ChatMessage'
 import { AuthenticationContext } from '../auth/AuthenticationContext'
 import RequireAuth from '../auth/RequireAuth'
+import { showOwnMessagesImmediately } from '../../config'
 
 const Chat: React.FC = () => {
   const [isConnected, setIsConnected] = React.useState(false)
@@ -24,10 +25,12 @@ const Chat: React.FC = () => {
       chatSocketRef.current.send(JSON.stringify(chatMsg2Send));
     }
 
-    setMessages(oldMessages => oldMessages.concat({
-      ...chatMsg2Send,
-      username: 'Me (test)'
-    })) // TODO
+    if (showOwnMessagesImmediately) {
+      setMessages(oldMessages => oldMessages.concat({
+        ...chatMsg2Send,
+        username: 'Me'
+      }))
+    }
   }
   React.useEffect(() => {
     const chatSocket = new WebSocket(
@@ -43,9 +46,15 @@ const Chat: React.FC = () => {
     })
 
     chatSocket.addEventListener('message', (event) => {
+      // console.log('Received message event:', event)
       const message = JSON.parse(event.data) as ChatMessage
       console.log('Received message:', message)
-      setMessages(oldMessages => oldMessages.concat(message))
+
+      if (!(showOwnMessagesImmediately && message.username === authContext.userName)) {
+        // if app is rednering own messages immediately,
+        // then skip showing own messages on broadcast from server
+        setMessages(oldMessages => oldMessages.concat(message))
+      }
     })
 
     chatSocket.addEventListener('error', (event) => {
@@ -62,6 +71,7 @@ const Chat: React.FC = () => {
 
     return () => {
       chatSocket.close()
+      chatSocketRef.current = null
     }
   }, [])
   return (
