@@ -30,11 +30,11 @@ const ChatInput: React.FC<{
     })
   })
   return (
-    <>
+    <div className='flex m-2'>
       <input
         type="text"
         disabled={props.disabled}
-        className='border-2 border-gray-300 rounded-md p-2 w-3/4'
+        className='grow border-2 border-gray-300 rounded-md p-2'
         ref={inputRef}
         value={message}
         onChange={handleChange}
@@ -47,7 +47,7 @@ const ChatInput: React.FC<{
         onClick={handleClick}>
         Send
       </button>
-    </>
+    </div>
   )
 }
 

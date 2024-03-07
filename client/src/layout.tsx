@@ -9,8 +9,8 @@ const Layout: React.FC<React.PropsWithChildren<{ pageTitle: string }>> = ({ page
   return (
     <AuthenticationContext.Provider value={authContext}>
       <div
-        className='container mx-auto'>
-        <nav className='bg-gray-800'>
+        className='container mx-auto flex flex-col h-full'>
+        <nav className='bg-gray-600'>
           <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
             <div className='flex h-16 items-center justify-between'>
               <div className='flex items-center'>
@@ -39,7 +39,7 @@ const Layout: React.FC<React.PropsWithChildren<{ pageTitle: string }>> = ({ page
             {pageTitle}
           </h1>
         </header>
-        <main>
+        <main className='grow flex flex-col max-h-[calc(100%-8rem)]'>
           {children}
         </main>
       </div>
