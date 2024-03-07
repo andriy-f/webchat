@@ -5,6 +5,8 @@ services:
       context: ./server
       target: development
     init: true
+    volumes:
+      - ./server/src:/app/src
     ports:
       - 8080:8080
     env_file:

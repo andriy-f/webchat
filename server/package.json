@@ -2,19 +2,25 @@
   "name": "webchat-server",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "type": "module",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node ./index.js",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "clean": "rimraf -- dist/*",
     "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Andriy Fetsyuk",
   "license": "ISC",
   "dependencies": {
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#f40213ec0a97d0d8721d9d32d92d6eb6ddcd22e7"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "@tsconfig/node20": "^20.1.2",
+    "@types/node": "^20.11.25",
+    "nodemon": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.2"
   }
 }

@@ -16,12 +16,12 @@ RUN set -ex; \
     npm ci; \
     npm cache clean --force
 
-COPY index.js ./
+COPY src/ ./src
 HEALTHCHECK --start-period=2s CMD [ "curl", "--fail", "-sS", "http://localhost:8080/health" ]
 ENV PORT=$PORT
 EXPOSE $PORT
 USER node
-CMD [ "node", "index.js" ]
+CMD [ "node", "./dist/index.js" ]
 
 FROM base as development
 ENV NODE_ENV=development

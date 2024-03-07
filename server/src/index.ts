@@ -3,15 +3,15 @@ import uws, { DEDICATED_COMPRESSOR_3KB } from 'uWebSockets.js'
 const serverPort = process.env.PORT ? parseInt(process.env.PORT) : 9001;
 
 // Signal handling
-function handle(signal) {
+const handleSignal: NodeJS.SignalsListener = (signal) => {
   console.log(`*^!@4=> Received event: ${signal}`)
   // handle cleanup, like closing db connections
   process.exit(0)
 }
 
-process.on('SIGHUP', handle)
-process.on('SIGINT', handle)
-process.on('SIGTERM', handle)
+process.on('SIGHUP', handleSignal)
+process.on('SIGINT', handleSignal)
+process.on('SIGTERM', handleSignal)
 
 const chatTopic = 'home/chat'
 
@@ -32,12 +32,12 @@ uws.App({
   message: (ws, message, isBinary) => {
     /* You can do app.publish('sensors/home/temperature', '22C') kind of pub/sub as well */
 
-    ws.publish(chatTopic, message, isBinary, true)
+    // ws.publish(chatTopic, message, isBinary, true)
     if (process.env.NODE_ENV === 'development') {
       console.log('message', message)
     }
     // Here we echo the message back, using compression if available
-    // const isOk = ws.send(message, isBinary, true);
+    const isOk = ws.send(message, isBinary, true);
   }
 
 }).get('/health', (res, req) => {
