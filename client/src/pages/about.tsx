@@ -24,7 +24,16 @@ const IndexPage: React.FC<PageProps> = () => {
       <section>
         <MyH2>Technologies</MyH2>
         <ul className='list-disc list-inside'>
-          <li>React</li>
+          <li>React with Gatsby</li>
+          <li>
+            <a
+              rel='noreferrer noopener'
+              href='https://tailwindcss.com/'
+              className='text-blue-500 hover:underline'
+            >
+              TailwindCSS
+            </a>
+          </li>
           <li>Websockets</li>
         </ul>
       </section>
