@@ -5,6 +5,7 @@ const ChatInput: React.FC<{
   onSend: (message: string) => void
 }> = (props) => {
   const [message, setMessage] = React.useState('')
+  const inputRef = React.useRef<HTMLInputElement>(null)
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setMessage(event.target.value)
@@ -22,14 +23,20 @@ const ChatInput: React.FC<{
       setMessage('')
     }
   }
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      inputRef.current?.focus()
+    })
+  })
   return (
     <>
       <input
         type="text"
         disabled={props.disabled}
         className='border-2 border-gray-300 rounded-md p-2 w-3/4'
+        ref={inputRef}
         value={message}
-        autoFocus={true}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder="Type a message..."
