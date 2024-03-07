@@ -1,10 +1,17 @@
 import uws, { DEDICATED_COMPRESSOR_3KB } from 'uWebSockets.js'
 
 const serverPort = process.env.PORT ? parseInt(process.env.PORT) : 9001;
+const isDevEnv = process.env.NODE_ENV === 'development'
+let appListenSocket: uws.us_listen_socket | null = null;
+let connectedClientCount = 0
 
 // Signal handling
 const handleSignal: NodeJS.SignalsListener = (signal) => {
   console.log(`*^!@4=> Received event: ${signal}`)
+  if (appListenSocket !== null) {
+    uws.us_listen_socket_close(appListenSocket)
+    appListenSocket = null
+  }
   // handle cleanup, like closing db connections
   process.exit(0)
 }
@@ -14,9 +21,12 @@ process.on('SIGINT', handleSignal)
 process.on('SIGTERM', handleSignal)
 
 const chatTopic = 'home/chat'
+interface KChatData {
+  _kchat_clientId: number
+}
 
 uws.App({
-}).ws('/*', {
+}).ws<KChatData>('/*', {
 
   /* There are many common helper features */
   idleTimeout: 32,
@@ -26,33 +36,44 @@ uws.App({
 
   /* Handlers */
   open: (ws) => {
-    /* Let this client listen to topic "broadcast" */
+    /* Let this client listen to topic $chatTopic */
     ws.subscribe(chatTopic);
+    // ws._kchat_clientId = connectedClientCount
+    ws.getUserData()._kchat_clientId = connectedClientCount
+    connectedClientCount += 1
   },
   message: (ws, message, isBinary) => {
-    /* You can do app.publish('sensors/home/temperature', '22C') kind of pub/sub as well */
 
-    // ws.publish(chatTopic, message, isBinary, true)
-    if (process.env.NODE_ENV === 'development') {
-      console.log('message', message)
+    // Send message to current client
+    // Uncomment if client app has 'showOwnMessagesImmediately' set to false
+    // const isOk = ws.send(message, isBinary, true)
+
+    // Broadcast messages to everyone except current client
+    ws.publish(chatTopic, message, isBinary, true)
+    if (isDevEnv) {
+      console.log(`message from client ${ws.getUserData()._kchat_clientId}`, message)
     }
-    // Here we echo the message back, using compression if available
-    const isOk = ws.send(message, isBinary, true);
+  },
+  close: (ws, code, message) => {
+    /* The library guarantees proper unsubscription at close */
+    connectedClientCount -= 1
+    if (isDevEnv) {
+      console.log(`A WebSocket for client ${ws.getUserData()._kchat_clientId} was closed`, code, message)
+    }
   }
-
 }).get('/health', (res, req) => {
   res.writeStatus('200 OK').end('healthy');
 }).get('/', (res, req) => {
   // generic http handler
 
-  res.writeStatus('200 OK').end('This is K-chat server!');
+  res.writeStatus('200 OK').end('This is K-chat server!')
 
 }).listen(serverPort, (listenSocket) => {
 
   if (listenSocket) {
-    console.log(`K-Chat server is listening on port ${serverPort}`);
+    appListenSocket = listenSocket
+    console.log(`K-Chat server is listening on port ${serverPort}`)
   } else {
-    console.log('Failed to listen to port ' + serverPort);
+    console.log('Failed to listen to port ' + serverPort)
   }
-
-});
+})
