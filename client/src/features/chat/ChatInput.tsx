@@ -17,7 +17,7 @@ const ChatInput: React.FC<{
     })
   })
   return (
-    <form className="flex m-2" action="#" method="POST" onSubmit={(e) => {
+    <form className="flex" action="#" method="POST" onSubmit={(e) => {
       e.preventDefault()
       message !== '' && props.onSend(message)
       setMessage('')

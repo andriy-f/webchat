@@ -11,25 +11,33 @@ const ChatMessages: React.FC<{ messages: ChatMessage[] }> = ({ messages }) => {
   return (
     <div
       ref={chatMessagesDivRef}
-      className='grow overflow-y-scroll flex flex-col border-t border-gray-200 bg-grey px-4 py-3'>
-      {messages && messages.map((m) => (
-        <div
-          className='mb-2 flex flex-row'
-          key={m.timestamp}>
-
-          <div className='font-bold'>
-            {m.username}:
-          </div>
+      className='grow overflow-y-scroll flex flex-col border-t border-gray-200 bg-grey mb-1 ring-1 rounded-md ring-black ring-opacity-5 p-2'>
+      {messages && messages.map((m) => {
+        const isCurrentAccountMessage = m.username === 'Me'
+        return (
           <div
-            className='grow ml-1 min-w-0 overflow-hidden overflow-ellipsis'
+            key={m.timestamp}
+            className={`rounded-md ${isCurrentAccountMessage ? 'ml-2 bg-cyan-200' : 'bg-teal-100'} shadow-lg ring-1 ring-black ring-opacity-5 p-1 my-2`}
           >
-            {m.text}
+            <div
+              className='flex flex-row'
+            >
+              <div
+                className='font-bold'
+              >{m.username}</div>,&nbsp;
+              <div
+                className='block min-w-40'
+              >{new Date(m.timestamp).toLocaleTimeString()}
+              </div>
+            </div>
+            <div
+              className='grow min-w-0 overflow-hidden overflow-ellipsis'
+            >
+              {m.text}
+            </div>
           </div>
-          <div className='hidden md:block min-w-40 ml-1'>
-            {new Date(m.timestamp).toLocaleString()}
-          </div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
