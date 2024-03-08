@@ -5,9 +5,9 @@ const ChatInput: React.FC<{
   onSend: (message: string) => void
 }> = (props) => {
   const [message, setMessage] = React.useState('')
-  const inputRef = React.useRef<HTMLInputElement>(null)
+  const inputRef = React.useRef<HTMLTextAreaElement>(null)
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+  const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     setMessage(event.target.value)
   }
 
@@ -22,13 +22,19 @@ const ChatInput: React.FC<{
       message !== '' && props.onSend(message)
       setMessage('')
     }}>
-      <input
-        type="text"
+      <textarea
         disabled={props.disabled}
         className='grow border-2 border-gray-300 rounded-md p-2'
         ref={inputRef}
         value={message}
         onChange={handleChange}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault()
+            message !== '' && props.onSend(message)
+            setMessage('')
+          }
+        }}
         placeholder="Type a message..."
       />
       <button

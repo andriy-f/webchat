@@ -33,7 +33,7 @@ const ChatMessages: React.FC<{ messages: ChatMessage[] }> = ({ messages }) => {
             </div>
             {/* Message text */}
             <div
-              className='grow min-w-0 overflow-hidden overflow-ellipsis'
+              className='grow min-w-0 overflow-hidden overflow-ellipsis whitespace-pre'
             >
               {m.text}
             </div>
