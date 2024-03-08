@@ -19,8 +19,9 @@ const ChatMessages: React.FC<{ messages: ChatMessage[] }> = ({ messages }) => {
             key={m.timestamp}
             className={`rounded-md ${isCurrentAccountMessage ? 'ml-2 bg-cyan-200' : 'bg-teal-100'} shadow-lg ring-1 ring-black ring-opacity-5 p-1 my-2`}
           >
+            {/* Message header */}
             <div
-              className='flex flex-row'
+              className='flex flex-row border-b-2 border-b-black border-opacity-5'
             >
               <div
                 className='font-bold'
@@ -30,6 +31,7 @@ const ChatMessages: React.FC<{ messages: ChatMessage[] }> = ({ messages }) => {
               >{new Date(m.timestamp).toLocaleTimeString()}
               </div>
             </div>
+            {/* Message text */}
             <div
               className='grow min-w-0 overflow-hidden overflow-ellipsis'
             >
