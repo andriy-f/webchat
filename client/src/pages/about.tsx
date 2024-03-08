@@ -5,6 +5,7 @@ import Layout from '../layout'
 import { serverUrl } from '../config'
 
 import { MyH2 } from '../common/MyComponents'
+import ExternalLink from '../common/ExternalLink'
 
 const pageTitle = 'About'
 
@@ -24,15 +25,14 @@ const IndexPage: React.FC<PageProps> = () => {
       <section>
         <MyH2>Technologies</MyH2>
         <ul className='list-disc list-inside'>
-          <li>React with Gatsby</li>
           <li>
-            <a
-              rel='noreferrer noopener'
+            <ExternalLink href='https://react.dev/'>React
+            </ExternalLink> with <ExternalLink href='https://www.gatsbyjs.com/'>
+              Gatsby</ExternalLink></li>
+          <li>
+            <ExternalLink
               href='https://tailwindcss.com/'
-              className='text-blue-500 hover:underline'
-            >
-              TailwindCSS
-            </a>
+            >TailwindCSS</ExternalLink>
           </li>
           <li>Websockets</li>
         </ul>
