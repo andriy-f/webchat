@@ -75,16 +75,15 @@ const Chat: React.FC = () => {
     }
   }, [])
   return (
-    <div className='flex flex-col h-full mx-auto sm:w-3/4'>
-      <RequireAuth>
-        <div className='flex'>Status:&nbsp;{isConnected ?
-          <div className='text-emerald-500'>Connected</div> :
-          <div className='text-red-500'>Disconnected</div>
-        }</div>
-        <ChatMessages messages={messages} />
-        <ChatInput disabled={!isConnected} onSend={handleSend} />
-      </RequireAuth>
-    </div>)
+    <RequireAuth>
+      <div className='flex text-center'>Status:&nbsp;{isConnected ?
+        <div className='text-emerald-500'>Connected</div> :
+        <div className='text-red-500'>Disconnected</div>
+      }</div>
+      <ChatMessages messages={messages} />
+      <ChatInput disabled={!isConnected} onSend={handleSend} />
+    </RequireAuth>
+  )
 }
 
 export default Chat
