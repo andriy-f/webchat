@@ -33,7 +33,7 @@ const Layout: React.FC<React.PropsWithChildren<{ pageTitle: string }>> = ({ page
             </div>
           </div>
         </nav>
-        <main className='grow flex flex-col max-h-[calc(100%-5rem)] md:w-full md:max-w-3xl md:mx-auto'>
+        <main className='grow flex flex-col max-h-[calc(100%-5rem)] px-1 md:w-full md:max-w-3xl md:mx-auto'>
           <h1 className="text-3xl font-bold underline text-center mb-1">
             {pageTitle}
           </h1>
