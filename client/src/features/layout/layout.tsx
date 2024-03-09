@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { AuthenticationContext } from '../auth/AuthenticationContext'
 import RegularMainMenu from './RegularMainMenu'
+import MobileMainMenu from './MobileMainMenu'
 
 const Layout: React.FC<React.PropsWithChildren<{ pageTitle: string }>> = ({ pageTitle, children }) => {
   const authContext = React.useContext(AuthenticationContext)
@@ -11,14 +12,16 @@ const Layout: React.FC<React.PropsWithChildren<{ pageTitle: string }>> = ({ page
       <div
         className='flex flex-col h-full max-h-full'>
         <nav className='bg-gray-600'>
-          {/* <MobileMainMenu /> */}
-          <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between'>
-            <RegularMainMenu />
-            <div className='text-white'>
-              {authContext.userName
-                ? `Hello, ${authContext.userName}`
-                : ''
-              }
+          <div className='flex items-center justify-between mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16'>
+            <MobileMainMenu />
+            <div className='hidden sm:flex flex-1 items-center justify-between'>
+              <RegularMainMenu />
+              <div className='text-white'>
+                {authContext.userName
+                  ? `Hello, ${authContext.userName}`
+                  : ''
+                }
+              </div>
             </div>
           </div>
         </nav>

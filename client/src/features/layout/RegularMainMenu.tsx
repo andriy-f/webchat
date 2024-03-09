@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import NavLink from '../navigation/NavLink'
+import { mainMenuItems } from '../navigation/mainMenuItems'
 
 const RegularMainMenu = () => {
   return (
@@ -8,10 +8,11 @@ const RegularMainMenu = () => {
       <div className='flex-shrink-0'>
         <div className='text-white text-lg'>K-Chat</div>
       </div>
-      <div className='block'>
+      <div>
         <div className='ml-10 flex items-baseline space-x-4'>
-          <NavLink to='/'>Home</NavLink>
-          <NavLink to='/about'>About</NavLink>
+          {mainMenuItems.map((item) => (
+            <NavLink to={item.to}>{item.label}</NavLink>
+          ))}
         </div>
       </div>
     </div>
