@@ -33,6 +33,10 @@ const Chat: React.FC = () => {
     }
   }
   React.useEffect(() => {
+    if(!serverUrl) {
+      return;
+    }
+
     const chatSocket = new WebSocket(
       serverUrl,
       'protocolOne',
