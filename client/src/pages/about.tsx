@@ -9,7 +9,7 @@ import ExternalLink from '../common/ExternalLink'
 
 const pageTitle = 'About'
 
-const IndexPage: React.FC<PageProps> = () => {
+const AboutPage: React.FC<PageProps> = () => {
   return (
     <Layout pageTitle='About'>
       <p>
@@ -53,6 +53,6 @@ const IndexPage: React.FC<PageProps> = () => {
   )
 }
 
-export default IndexPage
+export default AboutPage
 
 export const Head: HeadFC = () => <title>{pageTitle}</title>

@@ -3,18 +3,18 @@ import * as React from 'react'
 import type { HeadFC, PageProps } from 'gatsby'
 
 import Layout from '../features/layout/layout'
-import Login from '../features/auth/Login'
+import Logout from '../features/auth/Login'
 
-const pageTitle = 'Login'
+const pageTitle = 'Logout'
 
-const LoginPage: React.FC<PageProps> = () => {
+const LogoutPage: React.FC<PageProps> = () => {
   return (
     <Layout pageTitle={pageTitle}>
-      <Login />
+      <Logout />
     </Layout>
   )
 }
 
-export default LoginPage
+export default LogoutPage
 
 export const Head: HeadFC = () => <title>{pageTitle}</title>
