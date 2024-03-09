@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link, HeadFC, PageProps } from 'gatsby'
-import Layout from '../layout'
+import Layout from '../features/layout/layout'
 
 const pageStyles = {
   color: '#232129',

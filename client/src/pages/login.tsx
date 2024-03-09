@@ -2,7 +2,7 @@
 import * as React from 'react'
 import type { HeadFC, PageProps } from 'gatsby'
 
-import Layout from '../layout'
+import Layout from '../features/layout/layout'
 import Login from '../features/auth/Login'
 
 const pageTitle = 'Login'

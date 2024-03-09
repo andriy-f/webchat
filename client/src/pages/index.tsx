@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { HeadFC, PageProps } from 'gatsby'
 
-import Layout from '../layout'
+import Layout from '../features/layout/layout'
 import Chat from '../features/chat/Chat'
 
 const pageTitle = 'Home'
