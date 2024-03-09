@@ -8,6 +8,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
-    require('@headlessui/tailwindcss'),
+    // uncommenting line below makes VSCode TailwindCSS plugin not working
+    // require('@headlessui/tailwindcss'),
   ],
 }
