@@ -11,7 +11,7 @@ const Layout: React.FC<React.PropsWithChildren<{ pageTitle: string }>> = ({ page
     <AuthenticationContext.Provider value={authContext}>
       <div
         className='flex flex-col h-full max-h-full'>
-        <nav className='bg-gray-600'>
+        <nav className='bg-slate-600'>
           <div className='flex items-center justify-between mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16'>
             <MobileMainMenu />
             <div className='hidden sm:flex flex-1 items-center justify-between'>
