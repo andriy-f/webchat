@@ -1,10 +1,14 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 
 import { AuthenticationContext } from './AuthenticationContext'
 
 const RequireAuth: React.FC<React.PropsWithChildren> = ({ children }) => {
   const authContext = React.useContext(AuthenticationContext)
+  if (!authContext.userName) {
+    navigate('/login')
+  }
+
   return authContext.userName
     ? <>{children}</>
     : (<div className='my-2'>
