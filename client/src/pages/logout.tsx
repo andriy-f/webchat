@@ -3,7 +3,7 @@ import * as React from 'react'
 import type { HeadFC, PageProps } from 'gatsby'
 
 import Layout from '../features/layout/layout'
-import Logout from '../features/auth/Login'
+import Logout from '../features/auth/Logout'
 
 const pageTitle = 'Logout'
 
