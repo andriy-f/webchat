@@ -18,6 +18,6 @@ services:
 
 networks:
   internal:
-    proxy-tier:
-      name: common-proxy
-      external: true
+  proxy-tier:
+    name: common-proxy
+    external: true
