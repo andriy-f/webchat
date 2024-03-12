@@ -1,0 +1,13 @@
+services:
+  server:
+    restart: unless-stopped
+    image: ghcr.io/andriy-f/webchat-server
+    init: true
+    ports:
+      - "8080:8080"
+
+  client:
+    restart: unless-stopped
+    image: ghcr.io/andriy-f/webchat-client
+    ports:
+      - "8081:8081"
