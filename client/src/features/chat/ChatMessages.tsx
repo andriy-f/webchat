@@ -11,7 +11,7 @@ const ChatMessages: React.FC<{ messages: ChatMessage[] }> = ({ messages }) => {
   return (
     <div
       ref={chatMessagesDivRef}
-      className='grow overflow-y-scroll flex flex-col border-t border-gray-200 bg-grey mb-1 ring-1 rounded-md ring-black ring-opacity-5 p-2'>
+      className='flex-auto overflow-y-scroll flex flex-col border-t border-gray-200 bg-grey mb-1 ring-1 rounded-md ring-black ring-opacity-5 p-2'>
       {messages && messages.map((m) => {
         const isCurrentAccountMessage = m.username === 'Me'
         return (
