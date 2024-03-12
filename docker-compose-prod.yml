@@ -3,11 +3,17 @@ services:
     restart: unless-stopped
     image: ghcr.io/andriy-f/webchat-server
     init: true
-    ports:
-      - "8080:8080"
+    environment:
+      - "VIRTUAL_HOST=server.chat.ggrsoft.info"
+      - "LETSENCRYPT_HOST=server.chat.ggrsoft.info"
+      - "LETSENCRYPT_EMAIL=forspam.smith+lenc@gmail.com"
 
   client:
     restart: unless-stopped
     image: ghcr.io/andriy-f/webchat-client
-    ports:
-      - "8081:8081"
+
+networks:
+  internal:
+  proxy-tier:
+    name: common-proxy
+    external: true
