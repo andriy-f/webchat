@@ -14,15 +14,7 @@ const Layout: React.FC<React.PropsWithChildren<{ pageTitle: string }>> = ({ page
         <nav className='bg-slate-600'>
           <div className='flex items-center justify-between mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16'>
             <MobileMainMenu />
-            <div className='hidden sm:flex flex-1 items-center justify-between'>
-              <RegularMainMenu />
-              <div className='text-white'>
-                {authContext.userName
-                  ? `Hello, ${authContext.userName}`
-                  : ''
-                }
-              </div>
-            </div>
+            <RegularMainMenu />
           </div>
         </nav>
         <main className='flex-auto min-h-0 flex flex-col px-1 md:w-full md:max-w-3xl md:mx-auto p-2'>
