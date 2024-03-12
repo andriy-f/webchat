@@ -4,6 +4,7 @@ import { ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline'
 import { AuthenticationContext } from '../auth/AuthenticationContext'
 import NavLink from '../navigation/NavLink'
 import { mainMenuItems } from '../navigation/mainMenuItems'
+import ProfileAvatar from './ProfileAvatar'
 
 const RegularMainMenu = () => {
 
@@ -23,12 +24,10 @@ const RegularMainMenu = () => {
         </div>
       </div>
 
-      <div className='text-white'>
-        {authContext.userName
-          ? `Hello, ${authContext.userName}`
-          : ''
-        }
-      </div>
+      {authContext.isLoggedIn
+        ? <ProfileAvatar />
+        : <NavLink to='/login'>Login</NavLink>
+      }
     </div>
   )
 }
