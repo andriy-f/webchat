@@ -12,6 +12,15 @@ RUN chown -R node:node .
 
 USER node
 COPY package.json package-lock.json ./
+
+HEALTHCHECK --start-period=2s CMD [ "curl", "--fail", "-sS", "http://localhost:8080/health" ]
+ENV PORT=$PORT
+EXPOSE $PORT
+USER node
+
+FROM base as build
+
+# Dev set of dependencies
 ENV NODE_ENV=development
 RUN set -ex; \
     npm ci; \
@@ -19,15 +28,21 @@ RUN set -ex; \
 
 COPY tsconfig.json nodemon.json ./
 COPY src/ ./src
+ENV NODE_ENV=production
 RUN ["npm", "run", "build"]
 
-HEALTHCHECK --start-period=2s CMD [ "curl", "--fail", "-sS", "http://localhost:8080/health" ]
-ENV PORT=$PORT
-ENV NODE_ENV=production
-EXPOSE $PORT
-USER node
-CMD [ "node", "./dist/index.js" ]
-
-FROM base as development
+FROM build as development
 ENV NODE_ENV=development
+# Allows passing system signals
 CMD [ "./node_modules/.bin/nodemon" ]
+
+FROM base as production
+
+# Prod set of dependencies
+ENV NODE_ENV=production
+RUN set -ex; \
+    npm ci; \
+    npm cache clean --force
+
+COPY --chown=node:node --from=build /app/dist ./dist
+CMD [ "node", "./dist/index.js" ]
