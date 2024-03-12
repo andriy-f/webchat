@@ -4,8 +4,8 @@ services:
     image: ghcr.io/andriy-f/webchat-server
     init: true
     environment:
-      - "VIRTUAL_HOST=server.chat.ggrsoft.info"
-      - "LETSENCRYPT_HOST=server.chat.ggrsoft.info"
+      - "VIRTUAL_HOST=server-chat.ggrsoft.info"
+      - "LETSENCRYPT_HOST=server-chat.ggrsoft.info"
       - "LETSENCRYPT_EMAIL=forspam.smith+lenc@gmail.com"
 
   client:
