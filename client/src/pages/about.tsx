@@ -13,7 +13,7 @@ const AboutPage: React.FC<PageProps> = () => {
   return (
     <Layout pageTitle='About'>
       <p>
-        This is a simple chat application based on Websockets
+        This is a simplified chat application based on Websockets.
       </p>
       <section>
         <MyH2>Features</MyH2>
