@@ -34,7 +34,6 @@ RUN env \
 # Build
 # =====
 FROM base as build
-USER node
 ENV NODE_ENV=production
 RUN npm run build
 
