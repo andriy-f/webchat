@@ -1,0 +1,8 @@
+#!/bin/sh
+
+DC_CMD='docker compose -f docker-compose-local.yml';
+
+${DC_CMD} pull \
+  && ${DC_CMD} build --pull \
+  && ${DC_CMD} up --remove-orphans;
+${DC_CMD} down; # Automatically cleanup after 'up'
