@@ -5,24 +5,25 @@ services:
       context: ./server
       target: production
     init: true
+    environment:
+      - "VIRTUAL_HOST=server.kchat.local"
     networks:
       - proxy-tier
-    environment:
-      - "VIRTUAL_HOST=kchat-server.localhost"
 
   client:
     restart: unless-stopped
     build:
       context: ./client
       target: production
+      args:
+        - "GATSBY_KCHAT_SERVER_URL=wss://server.kchat.local:8443"
     environment:
-      - "VIRTUAL_HOST=kchat.localhost"
-      - "GATSBY_KCHAT_SERVER_URL=wss://kchat-server.localhost:8443"
+      - "VIRTUAL_HOST=kchat.local"
+      # - "GATSBY_KCHAT_SERVER_URL=wss://server.kchat.local:8443"
     networks:
       - proxy-tier
 
 networks:
-  internal:
   proxy-tier:
     name: common-proxy
     external: true

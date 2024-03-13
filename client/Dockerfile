@@ -34,6 +34,7 @@ RUN env \
 # Build
 # =====
 FROM base as build
+ARG GATSBY_KCHAT_SERVER_URL
 ENV NODE_ENV=production
 RUN npm run build
 
