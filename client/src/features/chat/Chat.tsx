@@ -77,7 +77,7 @@ const Chat: React.FC = () => {
       chatSocket.close()
       chatSocketRef.current = null
     }
-  }, [])
+  }, [authContext.userName])
   return (
     <RequireAuth>
       <div className='flex text-center'>Status:&nbsp;{isConnected ?

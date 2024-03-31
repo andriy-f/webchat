@@ -11,7 +11,7 @@ const Logout: React.FC = () => {
       authContext.logout()
       navigate('/')
     })
-  }, [])
+  }, [authContext])
 
   return (
     <>
