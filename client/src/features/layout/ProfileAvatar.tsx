@@ -3,13 +3,15 @@ import { Link } from 'gatsby'
 import { Menu, Transition } from '@headlessui/react'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 
+import { AuthenticationContext } from '../auth/AuthenticationContext'
 import { classNames } from '../../common/utils'
 
-const profileLiks = [
+const profileLinks = [
   { name: 'Log out', to: '/logout' },
 ]
 
 const ProfileAvatar: React.FC = () => {
+  const authContext = React.useContext(AuthenticationContext)
   return (
     <Menu as='div' className='relative ml-3'>
       <div>
@@ -29,7 +31,12 @@ const ProfileAvatar: React.FC = () => {
         leaveTo='transform opacity-0 scale-95'
       >
         <Menu.Items className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
-          {profileLiks.map((item) => (
+          <Menu.Item>
+            {({ active }) => (
+              <div className='px-4 py-2'>{authContext.userName}</div>
+            )}
+          </Menu.Item>
+          {profileLinks.map((item) => (
             <Menu.Item key={item.name}>
               {({ active }) => (
                 <Link
