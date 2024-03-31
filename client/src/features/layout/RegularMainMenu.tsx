@@ -18,7 +18,7 @@ const RegularMainMenu = () => {
         <div>
           <div className='ml-10 flex items-baseline space-x-4'>
             {mainMenuItems.map((item) => (
-              <NavLink to={item.to}>{item.label}</NavLink>
+              <NavLink key={item.label} to={item.to}>{item.label}</NavLink>
             ))}
           </div>
         </div>
