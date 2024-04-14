@@ -7,7 +7,7 @@ import { AuthenticationContext } from '../auth/AuthenticationContext'
 import { classNames } from '../../common/utils'
 
 const profileLinks = [
-  { name: 'Log out', to: '/logout' },
+  { name: 'Log out', to: '/logout' }
 ]
 
 const ProfileAvatar: React.FC = () => {

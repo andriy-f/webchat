@@ -1,12 +1,11 @@
 import * as React from 'react'
 
-import { serverUrl } from '../../config'
+import { serverUrl, showOwnMessagesImmediately } from '../../config'
 import ChatInput from './ChatInput'
 import ChatMessages from './ChatMessages'
-import { ChatMessage, ChatMessage2Send } from './ChatMessage'
+import { type ChatMessage, type ChatMessage2Send } from './ChatMessage'
 import { AuthenticationContext } from '../auth/AuthenticationContext'
 import RequireAuth from '../auth/RequireAuth'
-import { showOwnMessagesImmediately } from '../../config'
 
 const Chat: React.FC = () => {
   const [isConnected, setIsConnected] = React.useState(false)
@@ -14,14 +13,14 @@ const Chat: React.FC = () => {
   const chatSocketRef = React.useRef<WebSocket | null>(null)
   const authContext = React.useContext(AuthenticationContext)
 
-  const handleSend = (messageText: string) => {
+  const handleSend = (messageText: string): void => {
     const chatMsg2Send: ChatMessage2Send = {
       text: messageText,
       username: authContext.userName,
       timestamp: Date.now()
     }
 
-    if (chatSocketRef.current && chatSocketRef.current.readyState === WebSocket.OPEN) {
+    if (chatSocketRef.current !== null && chatSocketRef.current.readyState === WebSocket.OPEN) {
       chatSocketRef.current.send(JSON.stringify(chatMsg2Send))
     }
 
@@ -32,14 +31,15 @@ const Chat: React.FC = () => {
       }))
     }
   }
+
   React.useEffect(() => {
-    if(!serverUrl) {
+    if (serverUrl === '' || serverUrl === null || serverUrl === undefined) {
       return
     }
 
     const chatSocket = new WebSocket(
       serverUrl,
-      'protocolOne',
+      'protocolOne'
     )
 
     chatSocketRef.current = chatSocket
@@ -81,9 +81,9 @@ const Chat: React.FC = () => {
 
   return (
     <RequireAuth>
-      <div className='flex text-center'>Status:&nbsp;{isConnected ?
-        <div className='text-emerald-500'>Connected</div> :
-        <div className='text-red-500'>Disconnected</div>
+      <div className='flex text-center'>Status:&nbsp;{isConnected
+        ? <div className='text-emerald-500'>Connected</div>
+        : <div className='text-red-500'>Disconnected</div>
       }</div>
       <ChatMessages messages={messages} />
       <ChatInput disabled={!isConnected} onSend={handleSend} />

@@ -8,9 +8,9 @@ const Login: React.FC = () => {
   const [userName, setUserName] = React.useState('')
   const inputRef = React.useRef<HTMLInputElement>(null)
 
-  const handleLogin = () => {
+  const handleLogin: () => void = () => {
     authContext.login(userName)
-    navigate('/')
+    navigate('/').catch(() => { console.log('Error navigating to /') })
   }
 
   React.useEffect(() => {

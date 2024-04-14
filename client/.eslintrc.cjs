@@ -23,6 +23,10 @@ module.exports = {
       'parserOptions': {
         'sourceType': 'script'
       }
+    },
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      extends: 'love'
     }
   ],
   'parser': '@typescript-eslint/parser',

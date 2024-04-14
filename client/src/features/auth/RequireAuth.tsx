@@ -7,12 +7,12 @@ const RequireAuth: React.FC<React.PropsWithChildren> = ({ children }) => {
   const authContext = React.useContext(AuthenticationContext)
 
   React.useEffect(() => {
-    if (!authContext.userName) {
-      navigate('/login')
+    if (authContext.userName != null) {
+      navigate('/login').catch(() => { console.log('Error navigating to /login') })
     }
   })
 
-  return authContext.userName
+  return authContext.userName != null
     ? <>{children}</>
     : (<div className='my-2'>
       Please <Link className='rounded-md bg-indigo-600 px-3 py-1.5 text-white shadow-sm hover:bg-indigo-500' to='/login' >Login</Link>

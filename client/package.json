@@ -14,12 +14,14 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "lint-fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "autoprefixer": "^10.4.17",
+    "eslint-config-love": "^47.0.0",
     "gatsby": "^5.13.3",
     "gatsby-plugin-manifest": "^5.13.1",
     "gatsby-plugin-postcss": "^6.13.1",

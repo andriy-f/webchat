@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { ChatMessage } from './ChatMessage'
+import { type ChatMessage } from './ChatMessage'
 
 const ChatMessages: React.FC<{ messages: ChatMessage[] }> = ({ messages }) => {
   const chatMessagesDivRef = React.useRef<HTMLDivElement>(null)
   React.useEffect(() => {
-    if (chatMessagesDivRef.current) {
+    if (chatMessagesDivRef.current !== null) {
       chatMessagesDivRef.current.scrollTop = chatMessagesDivRef.current.scrollHeight
     }
   }, [messages])
@@ -12,7 +12,7 @@ const ChatMessages: React.FC<{ messages: ChatMessage[] }> = ({ messages }) => {
     <div
       ref={chatMessagesDivRef}
       className='flex-auto overflow-y-scroll flex flex-col border-t border-gray-200 bg-grey mb-1 ring-1 rounded-md ring-black ring-opacity-5 p-2'>
-      {messages && messages.map((m) => {
+      {messages?.map((m) => {
         const isCurrentAccountMessage = m.username === 'Me'
         return (
           <div

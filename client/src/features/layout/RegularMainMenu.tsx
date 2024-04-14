@@ -6,8 +6,7 @@ import NavLink from '../navigation/NavLink'
 import { mainMenuItems } from '../navigation/mainMenuItems'
 import ProfileAvatar from './ProfileAvatar'
 
-const RegularMainMenu = () => {
-
+const RegularMainMenu: React.FC = () => {
   const authContext = React.useContext(AuthenticationContext)
   return (
     <div className='hidden sm:flex flex-1 items-center justify-between'>
