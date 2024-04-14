@@ -35,12 +35,14 @@ module.exports = {
         'react'
     ],
     'rules': {
-        semi: ['warn', 'never'],
-        quotes: ['warn', 'single'],
+        semi: ['error', 'never'],
+        quotes: ['error', 'single'],
+        indent: ['error', 2],
+        'linebreak-style': ['error', 'unix'],
     },
     'settings': {
         'react': {
-          'version': 'detect',
+            'version': 'detect',
         }
     },
 }
