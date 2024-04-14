@@ -4,35 +4,43 @@ module.exports = {
     },
     ignorePatterns: ['node_modules/', '.cache/', 'public/'],
     'env': {
-        "browser": true,
-        "es2021": true
+        'browser': true,
+        'es2021': true
     },
-    "extends": [
-        "plugin:react/recommended"
+    'extends': [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react/recommended'
     ],
-    "overrides": [
+    'overrides': [
         {
-            "env": {
-                "node": true
+            'env': {
+                'node': true
             },
-            "files": [
-                ".eslintrc.{js,cjs}"
+            'files': [
+                '.eslintrc.{js,cjs}'
             ],
-            "parserOptions": {
-                "sourceType": "script"
+            'parserOptions': {
+                'sourceType': 'script'
             }
         }
     ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+    'parser': '@typescript-eslint/parser',
+    'parserOptions': {
+        'ecmaVersion': 'latest',
+        'sourceType': 'module'
     },
-    parser: '@typescript-eslint/parser',
-    "plugins": [
-        "react"
+    'plugins': [
+        '@typescript-eslint',
+        'react'
     ],
     'rules': {
         semi: ['warn', 'never'],
         quotes: ['warn', 'single'],
-    }
+    },
+    'settings': {
+        'react': {
+          'version': 'detect',
+        }
+    },
 }

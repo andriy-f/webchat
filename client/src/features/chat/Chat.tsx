@@ -22,7 +22,7 @@ const Chat: React.FC = () => {
     }
 
     if (chatSocketRef.current && chatSocketRef.current.readyState === WebSocket.OPEN) {
-      chatSocketRef.current.send(JSON.stringify(chatMsg2Send));
+      chatSocketRef.current.send(JSON.stringify(chatMsg2Send))
     }
 
     if (showOwnMessagesImmediately) {
@@ -34,7 +34,7 @@ const Chat: React.FC = () => {
   }
   React.useEffect(() => {
     if(!serverUrl) {
-      return;
+      return
     }
 
     const chatSocket = new WebSocket(
@@ -64,13 +64,13 @@ const Chat: React.FC = () => {
     chatSocket.addEventListener('error', (event) => {
       // disconnected due to error
       setIsConnected(false)
-      console.log('WebSocket error: ', event);
+      console.log('WebSocket error: ', event)
     })
 
     chatSocket.addEventListener('close', (event) => {
       // disconnected due to close
       setIsConnected(false)
-      console.log('WebSocket closed: ', event);
+      console.log('WebSocket closed: ', event)
     })
 
     return () => {
@@ -78,6 +78,7 @@ const Chat: React.FC = () => {
       chatSocketRef.current = null
     }
   }, [authContext.userName])
+
   return (
     <RequireAuth>
       <div className='flex text-center'>Status:&nbsp;{isConnected ?
