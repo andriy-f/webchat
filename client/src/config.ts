@@ -1,5 +1,5 @@
 // set up on production build
-const clientsideServerUrl = (typeof window !== 'undefined' && window.kchat)
+const clientsideServerUrl = (typeof window !== 'undefined' && window.kchat !== undefined)
   ? window.kchat.serverUrl
   : null
 // set up on development build

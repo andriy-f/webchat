@@ -6,6 +6,9 @@ import ChatMessages from './ChatMessages'
 import { type ChatMessage, type ChatMessage2Send } from './ChatMessage'
 import { AuthenticationContext } from '../auth/AuthenticationContext'
 import RequireAuth from '../auth/RequireAuth'
+interface WebSocketMessageEvent {
+  data: string
+}
 
 const Chat: React.FC = () => {
   const [isConnected, setIsConnected] = React.useState(false)
@@ -49,7 +52,7 @@ const Chat: React.FC = () => {
       console.log('Connected to the chat server.', event)
     })
 
-    chatSocket.addEventListener('message', (event) => {
+    chatSocket.addEventListener('message', (event: WebSocketMessageEvent) => {
       // console.log('Received message event:', event)
       const message = JSON.parse(event.data) as ChatMessage
       console.log('Received message:', message)

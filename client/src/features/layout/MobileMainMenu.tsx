@@ -16,7 +16,7 @@ const MobileMenuItem: React.FC<React.PropsWithChildren<{
           className={`${active
             ? 'bg-slate-500 text-white'
             : 'text-gray-900'
-          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
           to={props.to}
         >
           {props.children}
@@ -25,7 +25,7 @@ const MobileMenuItem: React.FC<React.PropsWithChildren<{
     </Menu.Item>
   )
 }
-const MobileMainMenu = () => {
+const MobileMainMenu: React.FC = () => {
   const authContext = React.useContext(AuthenticationContext)
 
   return (
