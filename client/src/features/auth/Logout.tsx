@@ -9,7 +9,7 @@ const Logout: React.FC = () => {
   React.useEffect(() => {
     setTimeout(() => {
       authContext.logout()
-      navigate('/').catch(() => { console.log('Error navigating to /') })
+      void navigate('/')
     })
   }, [authContext])
 

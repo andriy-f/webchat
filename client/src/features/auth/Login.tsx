@@ -10,7 +10,7 @@ const Login: React.FC = () => {
 
   const handleLogin: () => void = () => {
     authContext.login(userName)
-    navigate('/').catch(() => { console.log('Error navigating to /') })
+    void navigate('/')
   }
 
   React.useEffect(() => {

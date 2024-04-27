@@ -8,7 +8,7 @@ const RequireAuth: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   React.useEffect(() => {
     if (authContext.userName != null) {
-      navigate('/login').catch(() => { console.log('Error navigating to /login') })
+      void navigate('/login')
     }
   })
 
