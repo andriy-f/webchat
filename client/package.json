@@ -22,7 +22,7 @@
     "@heroicons/react": "^2.1.1",
     "autoprefixer": "^10.4.17",
     "eslint-config-love": "^47.0.0",
-    "gatsby": "^5.13.3",
+    "gatsby": "^5.13.4",
     "gatsby-plugin-manifest": "^5.13.1",
     "gatsby-plugin-postcss": "^6.13.1",
     "postcss": "^8.4.35",
